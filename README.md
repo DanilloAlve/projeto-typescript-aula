@@ -218,6 +218,41 @@ Content-Type: application/json
   "senha": "minimo8chars",
   "matricula": "MAT001",
   "especialidade": "Biologia",
+```
+
+---
+
+## 🧪 Testes
+
+O projeto inclui testes automatizados com **Vitest** e **Supertest**, e já possui cobertura configurada.
+
+### Comandos
+
+```bash
+npm install
+npm test
+npm run test:watch
+npm run build
+```
+
+### Onde estão os testes
+
+- `tests/unit/**` — testes unitários (serviços, middleware, utilitários, validações)
+- `tests/integration/**` — testes de integração (endpoints + fluxo de autenticação)
+
+### Coverage
+
+- O relatório `coverage/` é gerado automaticamente ao executar `npm test`.
+- O `coverage/` não deve ser versionado no repo final (gitignore já aplica isso).
+
+---
+
+### Health Check
+```
+GET http://localhost:6060/health
+```
+Resposta: `{ "status": "ok" }`
+
   "titulacao": "Mestrado",
   "dataNascimento": "1995-05-20"
 }
@@ -523,3 +558,11 @@ Resposta `201 Created`:
 Abra o frontend em `http://localhost:4200`, faça login, e acesse o dashboard. Os dados aparecerão nos gráficos da área à qual o sensor pertence.
 
 > Repita o POST várias vezes com valores diferentes para ver a evolução no gráfico.
+
+## 🧪 Testes
+
+Este projeto usa Vitest + Supertest para testes unitários e de integração.
+
+### Instalação
+```bash
+npm install
