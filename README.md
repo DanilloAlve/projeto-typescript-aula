@@ -224,7 +224,7 @@ Content-Type: application/json
 
 ## 🧪 Testes
 
-O projeto inclui testes automatizados com **Vitest** e **Supertest**, e já possui cobertura configurada.
+O projeto inclui testes automatizados com **Vitest** e **Supertest** e  possui cobertura configurada.
 
 ### Comandos
 
@@ -243,7 +243,7 @@ npm run build
 ### Coverage
 
 - O relatório `coverage/` é gerado automaticamente ao executar `npm test`.
-- O `coverage/` não deve ser versionado no repo final (gitignore já aplica isso).
+- O `coverage/` não deve ser versionado no repo final.
 
 ---
 
@@ -558,11 +558,3 @@ Resposta `201 Created`:
 Abra o frontend em `http://localhost:4200`, faça login, e acesse o dashboard. Os dados aparecerão nos gráficos da área à qual o sensor pertence.
 
 > Repita o POST várias vezes com valores diferentes para ver a evolução no gráfico.
-
-## 🧪 Testes
-
-Este projeto usa Vitest + Supertest para testes unitários e de integração.
-
-### Instalação
-```bash
-npm install
