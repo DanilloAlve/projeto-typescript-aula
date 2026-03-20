@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { type Relation, Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import Pesquisador from "./Pesquisador.js";
 
 @Entity("refreshtoken")
@@ -29,7 +29,7 @@ export default class RefreshToken {
     revoked:  boolean;
 
     @ManyToOne(() => Pesquisador, { onDelete: 'CASCADE' })
-    pesquisador:  Pesquisador;
+    pesquisador:  Relation<Pesquisador>;
 
     @CreateDateColumn()
     createAt: Date;

@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, type Relation } from "typeorm";
 import { Sensor } from "./Sensor.js";
 
 @Entity("leitura")
@@ -17,6 +17,6 @@ export default class Leitura {
 
     @ManyToOne(() => Sensor, (sensor) => sensor.leituras)
     @JoinColumn({ name: "sensor_id" })
-    sensor!: Sensor;
+    sensor!:  Relation<Sensor>;
 
 }

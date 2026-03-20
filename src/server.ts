@@ -15,7 +15,7 @@ import indexRouter from "./routes/index.routes.js";
 dotenv.config();
 
 const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:4200';
-const app = express();
+export const app = express();
 const PORT = process.env.PORT || 6060;
 
 app.set('trust proxy', 1);
@@ -47,19 +47,27 @@ app.use(compression({ threshold: 1024 }))
 
 app.use('/api', indexRouter);
 
+app.get('/health', (req, res) => {
+    res.status(200).json({ status: 'ok' });
+})
+
 app.use(errorHandler)
 
-// Tentando se conectar com o banco de dados
-appDataSource.initialize()
-    .then(() => {
-        console.log("Conectou com o banco!");
+export async function startServer() {
+    // Conecta com o banco e sobe o servidor.
+    // Em testes, isso é evitado para não iniciar listener/loop.
+    await appDataSource.initialize();
 
-        app.listen(PORT, () => {
-            console.log(`Server is running in port: ${PORT}`)
-        })
-
+    console.log("Conectou com o banco!");
+    app.listen(PORT, () => {
+        console.log(`Server is running in port: ${PORT}`)
     })
-    .catch((error) => {
+}
+
+// Só sobe automaticamente quando não estiver executando testes.
+if (process.env.NODE_ENV !== "test") {
+    startServer().catch((error) => {
         console.log(error)
     })
+}
 

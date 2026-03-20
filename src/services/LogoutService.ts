@@ -8,11 +8,16 @@ export default class LogoutService {
 
     private repoRefresh = appDataSource.getRepository(RefreshToken);
 
-        async logout(sessionId: string) {
-        await this.repoRefresh.update(
-            { sessionId },
-            { revoked: true }
-        );
+        async logout(refreshToken: string) {
+        try {
+            const decoded = jwt.verify(refreshToken, jwtConfig.refresh.secret) as any;
+            await this.repoRefresh.update(
+                { jti: decoded.jti },
+                { revoked: true }
+            );
+        } catch {
+            throw new AppError(400, "Token inválido para logout");
+        }
         }
 
         async logoutAll(userId: string) {

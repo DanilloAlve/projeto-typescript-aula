@@ -1,0 +1,57 @@
+name: CI/CD - Pipeline - INDT
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy: 
+      runs-on: self-hosted
+      steps:
+        - name: Checkout do Código
+          uses: actions/checkout@v4
+
+        - name: Restart Docker
+          run: |
+              sudo /usr/local/bin/docker-restart.sh
+              sleep 10
+
+        - name: Login no Github Container Registry
+          run: |
+              echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+        - name: Remover Cotainer Antigo
+          run:  |
+                docker compose down || true 
+
+        - name: Build da Imagem
+          run: |
+              docker build -t ghcr.io/o-orion/turma01:latest .
+
+        - name: Push Imagem
+          run: |
+              docker push ghcr.io/o-orion/turma01:latest
+
+        - name: Cria o .env na VM
+          run: |
+              cat > .env << EOF
+              DB_HOST=postgres
+              DB_PORT=${{ secrets.DB_PORT }}
+              DB_USER=${{ secrets.DB_USER }}
+              DB_PASS=${{ secrets.DB_PASS }}
+              DB_NAME=${{ secrets.DB_NAME }}
+              NODE_ENV=production
+              PORT=6060
+              JWT_ACCESS_SECRET=${{ secrets.JWT_ACCESS_SECRET }}
+              JWT_REFRESH_SECRET=${{ secrets.JWT_REFRESH_SECRET }}
+              EOF
+        
+        - name: Subir Docker
+          run: |
+              docker compose up -d --build
+
+        - name: Verificar se Subiu
+          run: |
+              sleep 10
+              docker compose ps
+

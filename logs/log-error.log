@@ -867,3 +867,11 @@
 {"level":"error","message":"Cannot read properties of undefined (reading 'trim') - /api/area/sensor/90d3edf4-0d99-4f3d-a3b8-fa089f414fd0 - ::1 "}
 {"level":"error","message":"Cannot read properties of undefined (reading 'trim') - /api/area/sensor/90d3edf4-0d99-4f3d-a3b8-fa089f414fd0 - ::1 "}
 {"level":"error","message":"Cannot read properties of undefined (reading 'trim') - /api/area/sensor/90d3edf4-0d99-4f3d-a3b8-fa089f414fd0 - ::1 "}
+{"level":"error","message":"Não encontrado - /boom - ::ffff:127.0.0.1 "}
+{"level":"error","message":"Token Inválido! - /secure - ::ffff:127.0.0.1 "}
+{"level":"error","message":"Token Inválido! - /secure - ::ffff:127.0.0.1 "}
+{"level":"error","message":"Erro teste - /async - ::ffff:127.0.0.1 "}
+{"level":"error","message":"Não encontrado - /boom - ::ffff:127.0.0.1 "}
+{"level":"error","message":"Token Inválido! - /secure - ::ffff:127.0.0.1 "}
+{"level":"error","message":"Token Inválido! - /secure - ::ffff:127.0.0.1 "}
+{"level":"error","message":"Erro teste - /async - ::ffff:127.0.0.1 "}

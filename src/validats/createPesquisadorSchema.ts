@@ -33,19 +33,10 @@ export const createPesquisadorSchema = z.object({
         z.string().optional()
     ),
 
-    dataNascimento: z.coerce.date({
-         message: "Data de nascimento inválida ou não preenchida" 
-    }).refine((data) => {
-        if (isNaN(data.getTime())) return false; // Garante que a data é válida
-        const hoje = new Date();
-        const idade = hoje.getFullYear() - data.getFullYear();
-        const mes = hoje.getMonth() - data.getMonth();
-        const dia = hoje.getDate() - data.getDate();
-        
-        let idadeFinal = idade;
-        if (mes < 0 || (mes === 0 && dia < 0)) {
-            idadeFinal--;
-        }
-        return idadeFinal >= 18;
-    }, "O pesquisador deve ter no mínimo 18 anos completos"),
+    dataNascimento: z.preprocess(
+        (val) => (val === undefined || val === "" ? undefined : val),
+        z.string({ error: "Data de nascimento é obrigatória" })
+            .min(1, "Data de nascimento é obrigatória")
+            .refine((val) => !isNaN(Date.parse(val)), "Data de nascimento inválida")
+    ),
 });

@@ -49,8 +49,8 @@ async refresh(refreshToken: string, userAgent: string, ip: string) {
   });
 
   return {
-    accessToken: this.generateAcessToken(tokenDb.pesquisador),
-    refreshToken: await this.generateRefreshToken(
+    tokenAccess: this.generateAcessToken(tokenDb.pesquisador),
+    tokenRefresh: await this.generateRefreshToken(
       tokenDb.pesquisador,
       novo.jti
     )

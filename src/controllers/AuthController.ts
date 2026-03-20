@@ -26,7 +26,9 @@ export default class AuthController {
     }
 
     async refreshToken(req: Request, res: Response) {
-        const { refreshToken, userAgent, ip } = req.body;
+        const { refreshToken } = req.body;
+        const userAgent = req.headers['user-agent'] ?? 'unknown';
+        const ip = req.ip as string;
 
         const tokens = await this.refreshService.refresh(refreshToken, userAgent, ip);
         res.status(200).json({ tokens })

@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { type Relation, Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import Area from "./Area.js";
 import Leitura from "./Leitura.js";
 
@@ -42,10 +42,10 @@ export class Sensor {
 
     @ManyToOne(() => Area, (area) => area.sensores)
     @JoinColumn({ name: "area_id" })
-    area!: Area;
+    area!: Relation<Area>;
 
     @OneToMany(() => Leitura, (leitura) => leitura.sensor)
-    leituras!: Leitura[]
+    leituras!: Relation<Leitura>[]
 
     @Column({ type: "varchar", nullable: true })
     finalidade?: string;

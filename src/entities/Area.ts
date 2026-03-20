@@ -1,4 +1,4 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { type Relation, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Sensor } from "./Sensor.js";
 
 @Entity("area")
@@ -32,6 +32,6 @@ export default class Area {
 
 
     @OneToMany(() => Sensor, (sensor) => sensor.area )
-    sensores!: Sensor[]
+    sensores!: Relation<Sensor>[]
 
 }
