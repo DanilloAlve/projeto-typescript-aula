@@ -1,5 +1,7 @@
 /.env
+/.env-didatico
 /node_modules
 /logs
 /dist
 /.dockerignore
+/coverage
